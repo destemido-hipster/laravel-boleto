@@ -24,7 +24,7 @@ class Bradesco extends AbstractBoleto implements BoletoContract
      *
      * @var array
      */
-    protected $carteiras = ['02', '04', '09', '21', '26'];
+    protected $carteiras = ['02', '04', '09', '21', '26','17'];
 
     /**
      * Trata-se de código utilizado para identificar mensagens especificas ao cedente, sendo
