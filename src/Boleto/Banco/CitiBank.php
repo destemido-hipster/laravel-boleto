@@ -282,11 +282,29 @@ class CitiBank extends AbstractBoleto implements BoletoContract
         if (!$this->iofCode) {
             $this->setIofCode();
         }
+        $this->setLinha();
         return $this->campoLivre = '4' . $this->getIofCode()  . $this->getBaseCode()
             . $this->getIndiceContaCosmo()
             . $this->getSeqContaCosmo()
             . $this->getDigVerficadorContaCosmo()
             . Util::numberFormatGeral($this->getNossoNumero(), 12);
+    }
+
+    public function setLinha() : void
+    {
+        $this->campoLinhaDigitavel = $this->getCodigoBanco() . $this->getMoeda() . '3'
+            . $this->getPortifolio() . $this->getDadosContaCosmo(1, 1)
+            . $this->getDadosContaCosmo(2, 5)
+            . $this->getSeqContaCosmo()
+            . $this->getDigVerficadorContaCosmo()
+            . Util::numberFormatGeral($this->getNossoNumero(), 12)
+            . Util::fatorVencimento($this->getDataVencimento())
+            .  Util::numberFormatGeral($this->getValor(), 10);
+    }
+
+    public function getDadosContaCosmo($ini, $tam)
+    {
+        return substr($this->contaCosmos, $ini, $tam);
     }
 
     /**
