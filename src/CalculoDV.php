@@ -106,6 +106,11 @@ class CalculoDV
         return Util::modulo11($nossoNumero);
     }
 
+    public static function citibankNossoNumero($nossoNumero)
+    {
+        return Util::modulo11($nossoNumero);
+    }
+
     /*
     |--------------------------------------------------------------------------
     | 041 - Banrisul

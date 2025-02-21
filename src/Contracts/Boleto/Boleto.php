@@ -28,11 +28,13 @@ interface Boleto
     const COD_BANCO_RENDIMENTO = '633';
     const COD_BANCO_PINE = '643';
     const COD_BANCO_OURINVEST = '712';
+    const COD_BANCO_CITIBANK = '745';
     const STATUS_REGISTRO = 1;
     const STATUS_ALTERACAO = 2;
     const STATUS_BAIXA = 3;
     const STATUS_ALTERACAO_DATA = 4;
     const STATUS_CUSTOM = 99;
+    
 
     /**
      * Render PDF.
