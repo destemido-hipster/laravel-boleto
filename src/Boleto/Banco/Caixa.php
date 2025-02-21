@@ -28,7 +28,7 @@ class Caixa extends AbstractBoleto implements BoletoContract
      *
      * @var array
      */
-    protected $carteiras = ['RG'];
+    protected $carteiras = ['RG','14'];
 
     /**
      * Espécie do documento, coódigo para remessa
