@@ -283,8 +283,8 @@ class CitiBank extends AbstractBoleto implements BoletoContract
             $this->setIofCode();
         }
 
-        $campoLivre = $this->campoLivre = '4' . $this->getIofCode()  . $this->getBaseCode()
-            . $this->getIndiceContaCosmo()
+        $campoLivre = $this->campoLivre = '3' . $this->getCarteira()  . $this->getBaseCode()
+            // . $this->getIndiceContaCosmo()
             . $this->getSeqContaCosmo()
             . $this->getDigVerficadorContaCosmo()
             . Util::numberFormatGeral($this->getNossoNumero(), 12);
@@ -295,9 +295,6 @@ class CitiBank extends AbstractBoleto implements BoletoContract
     {
 
         $this->campoLinhaDigitavel = $this->setLinha();
-        // var_dump($this->campoLinhaDigitavel);
-        // dd($this->campoLinhaDigitavel);
-
         return $this->campoLinhaDigitavel = Util::formatLinhaDigitavel($this->campoLinhaDigitavel);
     }
 
@@ -314,23 +311,18 @@ class CitiBank extends AbstractBoleto implements BoletoContract
             .  Util::numberFormatGeral($this->getValor(), 10);
         $campo1 = substr($linhaDigitavel, 0, 9);
         $campo1 .= Util::modulo10($campo1);
-        // var_dump($campo1);
-        // echo "<br>";
+        
         $campo2 = substr($linhaDigitavel, 9, 10);
         $campo2 .= Util::modulo10($campo2);
-        // var_dump($campo2);
-        // echo "<br>";
+        
         $campo3 = substr($linhaDigitavel, 19, 10);
         $campo3 .= Util::modulo10($campo3);
-        // var_dump($campo3);
-        // echo "<br>";
+        
         $campo4 = substr($barCode, 4, 1);
-        // var_dump($campo4);
-        // echo "<br>";
+       
 
         $campo5 = substr($linhaDigitavel, 29, 14);
-        // var_dump($campo);
-        // echo "<br>";
+       
         return $campo1 . $campo2 . $campo3 . $campo4 . $campo5;
     }
 
