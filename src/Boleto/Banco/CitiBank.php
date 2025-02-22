@@ -282,7 +282,7 @@ class CitiBank extends AbstractBoleto implements BoletoContract
         if (!$this->iofCode) {
             $this->setIofCode();
         }
-        $this->setLinha();
+        
         return $this->campoLivre = '4' . $this->getIofCode()  . $this->getBaseCode()
             . $this->getIndiceContaCosmo()
             . $this->getSeqContaCosmo()
@@ -290,9 +290,16 @@ class CitiBank extends AbstractBoleto implements BoletoContract
             . Util::numberFormatGeral($this->getNossoNumero(), 12);
     }
 
-    public function setLinha() : void
+    public function getLinhaDigitavel()
     {
-        $this->campoLinhaDigitavel = $this->getCodigoBanco() . $this->getMoeda() . '3'
+        $this->campoLinhaDigitavel = $this->setLinha();
+        return $this->campoLinhaDigitavel = Util::formatLinhaDigitavel($this->campoLinhaDigitavel);
+    }
+
+    public function setLinha()
+    {
+        $barCode = $this->getCodigoBarras();
+        $linhaDigitavel = $this->getCodigoBanco() . $this->getMoeda() . '3'
             . $this->getPortifolio() . $this->getDadosContaCosmo(1, 1)
             . $this->getDadosContaCosmo(2, 5)
             . $this->getSeqContaCosmo()
@@ -300,6 +307,17 @@ class CitiBank extends AbstractBoleto implements BoletoContract
             . Util::numberFormatGeral($this->getNossoNumero(), 12)
             . Util::fatorVencimento($this->getDataVencimento())
             .  Util::numberFormatGeral($this->getValor(), 10);
+
+        $campo1 = substr($linhaDigitavel, 0, 9);
+        $campo1 .= Util::modulo10($campo1);
+        $campo2 = substr($linhaDigitavel, 9, 10);
+        $campo2 .= Util::modulo10($campo2);
+        $campo3 = substr($linhaDigitavel, 19, 10);
+        $campo3 .= Util::modulo10($campo3);
+        $campo4 = substr($barCode, 4, 1);
+        $campo5 = substr($linhaDigitavel, 29, 14);
+
+        return $campo1 . $campo2 . $campo3 . $campo4 . $campo5;
     }
 
     public function getDadosContaCosmo($ini, $tam)
@@ -316,18 +334,7 @@ class CitiBank extends AbstractBoleto implements BoletoContract
      */
     public static function parseCampoLivre($campoLivre)
     {
-        return [
-            'convenio'        => null,
-            'agencia'         => null,
-            'agenciaDv'       => null,
-            'contaCorrente'   => null,
-            'contaCorrenteDv' => null,
-            'codigoCliente'   => substr($campoLivre, 1, 7),
-            'nossoNumero'     => substr($campoLivre, 8, 12),
-            'nossoNumeroDv'   => substr($campoLivre, 20, 1),
-            'nossoNumeroFull' => substr($campoLivre, 8, 13),
-            'carteira'        => substr($campoLivre, 22, 3),
-        ];
+        return [];
     }
 
     /**
