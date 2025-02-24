@@ -337,6 +337,8 @@ interface Boleto
      */
     public function getMostrarEnderecoFichaCompensacao();
 
+    public function getValorCobrado();
+
     /**
      * @return bool
      */

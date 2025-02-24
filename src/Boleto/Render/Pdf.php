@@ -208,7 +208,7 @@ class Pdf extends AbstractPdf implements PdfContract
         $this->Cell(30, $this->cell, $this->_(''), 'R');
         $this->Cell(30, $this->cell, $this->_(''), 'R');
         $this->Cell(30, $this->cell, $this->_(''), 'R');
-        $this->Cell(50, $this->cell, $this->_('teste'), 'R', 1, 'R');
+        $this->Cell(50, $this->cell, $this->_($this->boleto[$i]->getValorCobrado()), 'R', 1, 'R');
 
         $this->SetFont($this->PadraoFont, '', $this->fdes);
         $this->Cell(0, $this->desc, $this->_('Pagador'), 'TLR', 1);
@@ -362,7 +362,7 @@ class Pdf extends AbstractPdf implements PdfContract
 
         $this->Cell(120, $this->cell, $this->_(''), 'BLR');
         $this->SetFont($this->PadraoFont, 'B', $this->fcel);
-        $this->Cell(50, $this->cell, $this->_('teste2'), 'BR', 1,'R');
+        $this->Cell(50, $this->cell, $this->_($this->boleto[$i]->getValorCobrado()), 'BR', 1,'R');
 
         $yEndPix = $this->GetY();
 

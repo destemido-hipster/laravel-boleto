@@ -425,6 +425,13 @@ abstract class AbstractBoleto implements BoletoContract
     private $pixChaveTipo = null;
 
     /**
+     * valor Cobrado
+     *
+     * @var string
+     */
+    protected $valorCobrado = '';
+
+    /**
      * AbstractBoleto constructor.
      *
      * @param array $params
@@ -2214,5 +2221,29 @@ abstract class AbstractBoleto implements BoletoContract
             'pix_qrcode'                         => $this->getPixQrCode(),
             'pix_qrcode_image'                   => $this->getPixQrCodeBase64(),
         ], $this->variaveis_adicionais);
+    }
+
+    /**
+     * Get valor Cobrado
+     *
+     * @return  string
+     */ 
+    public function getValorCobrado()
+    {
+        return $this->valorCobrado;
+    }
+
+    /**
+     * Set valor Cobrado
+     *
+     * @param  string  $valorCobrado  valor Cobrado
+     *
+     * @return  self
+     */ 
+    public function setValorCobrado(string $valorCobrado)
+    {
+        $this->valorCobrado = $valorCobrado;
+
+        return $this;
     }
 }
