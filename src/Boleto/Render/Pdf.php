@@ -361,7 +361,8 @@ class Pdf extends AbstractPdf implements PdfContract
         $this->Cell(50, $this->desc, $this->_('(=) Valor cobrado'), 'TR', 1);
 
         $this->Cell(120, $this->cell, $this->_(''), 'BLR');
-        $this->Cell(50, $this->cell, $this->_('teste2'), 'R', 1, 'R');
+        $this->SetFont($this->PadraoFont, 'B', $this->fcel);
+        $this->Cell(50, $this->cell, $this->_('teste2'), 'BR', 1,'R');
 
         $yEndPix = $this->GetY();
 
