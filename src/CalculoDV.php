@@ -111,6 +111,11 @@ class CalculoDV
         return Util::modulo11($nossoNumero);
     }
 
+    public static function safraNossoNumero($nossoNumero)
+    {
+        return Util::modulo11($nossoNumero);
+    }
+
     /*
     |--------------------------------------------------------------------------
     | 041 - Banrisul
