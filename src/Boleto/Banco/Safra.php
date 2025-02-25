@@ -223,8 +223,7 @@ class Safra extends AbstractBoleto implements BoletoContract
      */
     protected function gerarNossoNumero()
     {
-        return Util::numberFormatGeral($this->getNumero(), 12)
-            . CalculoDV::citibankNossoNumero($this->getNumero());
+        return Util::numberFormatGeral($this->getNumero(), 9);
     }
 
     /**
@@ -262,7 +261,7 @@ class Safra extends AbstractBoleto implements BoletoContract
             return $this->campoLivre;
         }
 
-        $campoLivre = $this->campoLivre = '7' . substr($this->getAgencia(), 0, 4)  . substr($this->getAgencia(), -1, 1)
+        $campoLivre = $this->campoLivre = '7' . substr($this->getAgencia(), 0, 4)  . substr($this->getAgencia(), -1)
             // . $this->getIndiceContaCosmo()
             . Util::numberFormatGeral($this->getCodigoCliente(), 9)
             . Util::numberFormatGeral($this->getNossoNumero(), 9)
