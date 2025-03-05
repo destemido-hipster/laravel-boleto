@@ -245,7 +245,7 @@ class Santander extends AbstractBoleto implements BoletoContract
      */
     public function getNossoNumeroBoleto()
     {
-        return substr($this->getNossoNumero(), 0, -1) . '-' . substr($this->getNossoNumero(), -1);
+        return $this->getNossoNumero();
     }
 
     /**
